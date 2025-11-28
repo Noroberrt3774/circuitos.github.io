@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Elementos de Circuito</title>
+  <style>
+    :root{
+      --bg: #f3f7fb;
+      --card: #ffffff;
+      --accent: #2b8aef;
+      --accent-2: #2ea46b;
+      --text: #0b2545;
+      --muted: #55607a;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, Arial, sans-serif;
+      background: linear-gradient(180deg, var(--bg), #e9f0fb);
+      color: var(--text);
+      padding: 24px;
+    }
+    header {
+      max-width: 1100px;
+      margin: 0 auto 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 20px;
+    }
+    nav.cards {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .btn {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px;
+      border-radius: 10px;
+      background: var(--card);
+      border: 1px solid rgba(11,37,69,0.06);
+      cursor: pointer;
+      transition: transform .12s ease, box-shadow .12s ease;
+    }
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 18px rgba(43,138,239,0.12);
+    }
+    .btn.active {
+      outline: 3px solid rgba(43,138,239,0.12);
+    }
+    .card {
+      background: var(--card);
+      padding: 20px;
+      border-radius: 12px;
+      min-height: 320px;
+      border: 1px solid rgba(0,0,0,0.1);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    }
+    img.component-img {
+      max-width: 100%;
+      height: auto;
+      margin: 10px 0;
+      border-radius: 6px;
+    }
+    .formula {
+      font-family: monospace;
+      background: #eef2f8;
+      padding: 4px 6px;
+      border-radius: 4px;
+      display: inline-block;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Elementos de Circuito</h1>
+  <div class="meta">Roberto Jesús Gómez Medina y Óscar Jesús Martínez Lamas  1°C</div>
+</header>
+
+<div class="container">
+  <nav class="cards">
+    <button class="btn" data-target="resistores"><strong>Resistores</strong></button>
+    <button class="btn" data-target="capacitores"><strong>Capacitores</strong></button>
+    <button class="btn" data-target="inductores"><strong>Inductores</strong></button>
+    <button class="btn" data-target="diodos"><strong>Diodos</strong></button>
+    <button class="btn" data-target="transistores"><strong>Transistores</strong></button>
+    <button class="btn" data-target="faraday"><strong>Ley de Faraday</strong></button>
+    <button class="btn" data-target="kirchhoff"><strong>Leyes de Kirchhoff</strong></button>
+    <button class="btn" data-target="ohm"><strong>Ley de Ohm</strong></button>
+    <button class="btn" data-target="bibliografia"><strong>Bibliografía</strong></button>
+  </nav>
+
+  <main class="card" id="panel">
+    <h2 id="title">Bienvenido</h2>
+    <div id="content"><p>Selecciona una sección para ver su contenido.</p></div>
+  </main>
+</div>
+
+<script>
+
+const sections = {
+
+  resistores: {
+    title: "Resistores",
+    intro: "Los resistores son componentes fundamentales que limitan el flujo de corriente y definen el comportamiento eléctrico de un circuito.",
+    content: `
+      <p><strong>¿Qué son?</strong> Son dispositivos que se oponen al paso de la corriente eléctrica mediante la resistencia, cuya unidad es el <strong>ohmio (Ω)</strong>.</p>
+
+      <p><strong>Funciones principales:</strong></p>
+      <ul>
+        <li>Limitar corriente para proteger componentes.</li>
+        <li>Dividir voltaje.</li>
+        <li>Establecer niveles de señal.</li>
+        <li>Drenar carga en capacitores.</li>
+      </ul>
+
+      <p><strong>Propiedades:</strong></p>
+      <ul>
+        <li><strong>Resistencia:</strong> oposición al flujo de corriente.</li>
+        <li><strong>Tolerancia:</strong> variación permitida del valor.</li>
+        <li><strong>Potencia:</strong> energía máxima que soporta.</li>
+      </ul>
+
+      <p><strong>Tipos:</strong></p>
+      <ul>
+        <li>Carbón.</li>
+        <li>Película metálica.</li>
+        <li>Bobinados.</li>
+        <li>SMD.</li>
+      </ul>
+
+      <p><strong>Ley relacionada:</strong> <span class="formula">V = I · R</span></p>
+      <img src="image.png" alt="Imagen de un resistor" width="300">
+    `
+  },
+
+  capacitores: {
+    title: "Capacitores",
+    intro: "Los capacitores almacenan energía en forma de campo eléctrico entre dos placas.",
+    content: `
+      <p><strong>¿Qué son?</strong> Elementos que almacenan carga eléctrica entre dos placas separadas por un material dieléctrico.</p>
+
+      <p><strong>Propiedades fundamentales:</strong></p>
+      <ul>
+        <li><strong>Capacitancia:</strong> capacidad de almacenamiento de carga.</li>
+        <li><strong>Dieléctrico:</strong> material aislante entre las placas.</li>
+        <li><strong>Voltaje máximo:</strong> límite seguro de operación.</li>
+      </ul>
+
+      <p><strong>Aplicaciones:</strong></p>
+      <ul>
+        <li>Filtrado en fuentes.</li>
+        <li>Temporización RC.</li>
+        <li>Acoplamiento de señales.</li>
+        <li>Almacenamiento instantáneo.</li>
+      </ul>
+
+      <p><strong>Fórmula:</strong> <span class="formula">C = ε (A / d)</span></p>
+      <img src="image copy.png" alt="Imagen de un resistor" width="300">
+    `
+  },
+
+  inductores: {
+    title: "Inductores",
+    intro: "Los inductores almacenan energía mediante un campo magnético generado por una bobina.",
+    content: `
+      <p><strong>¿Qué son?</strong> Son bobinas hechas con hilo conductor enrollado que generan un campo magnético al circular corriente a través de ellas. Se oponen a cambios repentinos en la corriente.</p>
+
+      <p><strong>Propiedades de los inductores:</strong></p>
+      <ul>
+        <li><strong>Inductancia (L):</strong> capacidad de generar campo magnético. Se mide en henrios (H).</li>
+        <li><strong>Reactancia inductiva:</strong> oposición al cambio de corriente en AC.</li>
+        <li><strong>Factor Q:</strong> eficiencia del inductor.</li>
+      </ul>
+
+      <p><strong>Aplicaciones:</strong></p>
+      <ul>
+        <li>Filtros paso bajo y paso alto.</li>
+        <li>Sistemas de radiofrecuencia.</li>
+        <li>Transformadores.</li>
+        <li>Almacenamiento de energía en convertidores DC-DC.</li>
+      </ul>
+
+      <p><strong>Ley fundamental:</strong> <span class="formula">V = L (di/dt)</span></p>
+
+<img src="WhatsApp Image 2025-11-28 at 1.53.11 PM.jpeg" alt="Imagen de un resistor" width="300">
+      
+    `
+  },
+
+  diodos: {
+    title: "Diodos",
+    intro: "Los diodos permiten el paso de corriente solo en un sentido gracias a su unión PN.",
+    content: `
+      <p><strong>¿Qué son?</strong> Son dispositivos semiconductores que permiten el flujo de corriente únicamente cuando se encuentran polarizados en sentido directo. Están compuestos por una unión PN.</p>
+
+      <p><strong>Características principales:</strong></p>
+      <ul>
+        <li><strong>Polarización directa:</strong> conduce corriente.</li>
+        <li><strong>Polarización inversa:</strong> bloquea corriente.</li>
+        <li><strong>Voltaje umbral:</strong> voltaje mínimo para conducir.</li>
+      </ul>
+
+      <p><strong>Tipos de diodos:</strong></p>
+      <ul>
+        <li>Diodo rectificador.</li>
+        <li>LED (emisión de luz).</li>
+        <li>Zener (regulación de voltaje).</li>
+        <li>Schottky (alta velocidad).</li>
+        <li>Varicap (capacitancia variable).</li>
+      </ul>
+
+      <p><strong>Aplicaciones:</strong></p>
+      <ul>
+        <li>Rectificación de corriente.</li>
+        <li>Protección de circuitos.</li>
+        <li>Reguladores de voltaje.</li>
+        <li>Señalización luminosa.</li>
+      </ul>
+
+    <img src="WhatsApp Image 2025-11-28 at 2.05.30 PM.jpeg" alt="Imagen de un resistor" width="300">
+    `
+  },
+
+  transistores: {
+    title: "Transistores",
+    intro: "Los transistores son dispositivos capaces de amplificar señales o funcionar como interruptores.",
+    content: `
+      <p><strong>¿Qué son?</strong> Elementos semiconductores con tres terminales (base, colector y emisor o compuerta, drenador y surtidor) capaces de controlar grandes corrientes mediante señales pequeñas.</p>
+
+      <p><strong>Tipos principales:</strong></p>
+      <ul>
+        <li><strong>BJT:</strong> Transistor bipolar controlado por corriente.</li>
+        <li><strong>MOSFET:</strong> Transistor de efecto de campo controlado por voltaje.</li>
+      </ul>
+
+      <p><strong>Aplicaciones:</strong></p>
+      <ul>
+        <li>Amplificadores de señal.</li>
+        <li>Conmutación electrónica.</li>
+        <li>Reguladores de potencia.</li>
+        <li>Controladores de motores.</li>
+      </ul>
+
+      <p><strong>Función básica:</strong> Permite controlar la corriente de salida a partir de una señal de entrada débil.</p>
+
+       <img src="WhatsApp Image 2025-11-28 at 2.07.35 PM.jpeg" alt="Imagen de un resistor" width="300">
+    `
+  },
+
+  faraday: {
+    title: "Ley de Faraday",
+    intro: "Describe cómo un cambio en el flujo magnético induce un voltaje en un circuito.",
+    content: `
+      <p>La ley de Faraday establece que una variación del flujo magnético en una espira genera una fuerza electromotriz inducida. Esta ley es la base del funcionamiento de generadores y transformadores.</p>
+
+      <p><strong>Fórmula:</strong> <span class="formula">ε = - dΦ/dt</span></p>
+
+      <p><strong>Conceptos clave:</strong></p>
+      <ul>
+        <li><strong>Flujo magnético:</strong> cantidad de líneas de campo que atraviesan una superficie.</li>
+        <li><strong>Inducción electromagnética:</strong> generación de voltaje sin contacto físico.</li>
+        <li><strong>Ley de Lenz:</strong> el signo negativo indica oposición al cambio.</li>
+      </ul>
+
+      <p><strong>Aplicaciones:</strong></p>
+      <ul>
+        <li>Generadores eléctricos.</li>
+        <li>Transformadores.</li>
+        <li>Lectores de tarjetas magnéticas.</li>
+        <li>Frenos electromagnéticos.</li>
+      </ul>
+<img src="WhatsApp Image 2025-11-28 at 2.14.55 PM.jpeg" alt="Imagen de un resistor" width="300">
+      <img src="WhatsApp Image 2025-11-28 at 2.10.46 PM.jpeg" alt="Imagen de un resistor" width="300">
+    `
+  },
+
+  kirchhoff: {
+    title: "Leyes de Kirchhoff",
+    intro: "Permiten analizar circuitos complejos aplicando conservación de carga y energía.",
+    content: `
+      <p><strong>Ley de Corrientes (Nodo):</strong> La suma de corrientes que entran a un nodo es igual a la suma de las que salen. Se basa en la conservación de la carga.</p>
+
+      <p><strong>Ley de Voltajes (Malla):</strong> La suma de los voltajes en una malla cerrada es igual a cero. Se basa en la conservación de energía.</p>
+
+      <p><strong>Importancia:</strong></p>
+      <ul>
+        <li>Permiten resolver circuitos con múltiples fuentes.</li>
+        <li>Son la base del método de nodos y mallas.</li>
+        <li>Útiles para análisis en DC y AC.</li>
+      </ul>
+
+      <img src="WhatsApp Image 2025-11-28 at 2.17.19 PM.jpeg" alt="Imagen de un resistor" width="300">
+    `
+  },
+
+  ohm: {
+    title: "Ley de Ohm",
+    intro: "Relaciona voltaje, corriente y resistencia en un circuito eléctrico.",
+    content: `
+      <p>La ley de Ohm indica cómo se comportan los elementos resistivos y permite determinar cualquiera de las tres variables eléctricas: voltaje, corriente y resistencia.</p>
+
+      <p><strong>Fórmula principal:</strong> <span class="formula">V = I · R</span></p>
+
+      <p><strong>Despejes:</strong></p>
+      <ul>
+        <li><span class="formula">I = V / R</span></li>
+        <li><span class="formula">R = V / I</span></li>
+      </ul>
+
+      <p><strong>Aplicaciones:</strong></p>
+      <ul>
+        <li>Cálculo de resistores en circuitos.</li>
+        <li>Diseño de fuentes de alimentación.</li>
+        <li>Protección de LEDs y componentes sensibles.</li>
+        <li>Análisis de fallas eléctricas.</li>
+      </ul>
+
+      <img src="WhatsApp Image 2025-11-28 at 2.19.29 PM.jpeg" alt="Imagen de un resistor" width="300">
+    `
+  },
+
+  bibliografia: {
+    title: "Bibliografía",
+    content: `
+      <ul>
+        <li><a href="https://deingenierias.com/electronica/resistores/" target="_blank">Resistores – DeIngenierías</a></li>
+        <li><a href="https://deingenierias.com/electronica/capacitores/" target="_blank">Capacitores – DeIngenierías</a></li>
+        <li><a href="https://deingenierias.com/electronica/inductores/" target="_blank">Inductores – DeIngenierías</a></li>
+        <li><a href="https://deingenierias.com/electronica/diodo/" target="_blank">Diodos – DeIngenierías</a></li>
+        <li><a href="https://concepto.de/transistor/" target="_blank">Transistores – Concepto.de</a></li>
+        <li><a href="https://concepto.de/ley-de-faraday/" target="_blank">Ley de Faraday – Concepto.de</a></li>
+        <li><a href="https://www.lifeder.com/leyes-kirchhoff/" target="_blank">Leyes de Kirchhoff – Lifeder</a></li>
+        <li><a href="https://solar-energia.net/electricidad/leyes/ley-de-ohm" target="_blank">Ley de Ohm – Solar-Energía.net</a></li>
+      </ul>
+    `
+  }
+};
+
+/* Navegación */
+document.querySelectorAll(".btn").forEach(btn=>{
+  btn.onclick = () => {
+    document.querySelectorAll(".btn").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+    const key = btn.dataset.target;
+    document.getElementById("title").textContent = sections[key].title;
+    document.getElementById("content").innerHTML =
+      (sections[key].intro ? `<p>${sections[key].intro}</p>` : ``) +
+      sections[key].content;
+  };
+});
+
+document.querySelectorAll(".btn")[0].click();
+
+</script>
+
+</body>
+</html>
